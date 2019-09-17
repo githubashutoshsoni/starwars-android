@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="clickListener"
+			type="android.view.View.OnClickListener" />
+
+		<variable
+			name="gameUnit"
+			type="com.starwars.android.data.room.models.GameUnit" />
+	</data>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:onClick="@{clickListener}"
+		android:orientation="vertical">
+
+		<ImageView
+			android:id="@+id/unitPicture"
+			android:layout_width="120dp"
+			android:layout_height="120dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="16dp"
+			android:layout_marginBottom="4dp"
+			android:transitionName="characterImage"
+			app:imageFromUrl="@{gameUnit.picture}"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:srcCompat="@tools:sample/avatars" />
+
+		<TextView
+			android:id="@+id/unitName"
+			style="@style/TextViewTitle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="4dp"
+			android:layout_marginEnd="16dp"
+			android:text="@{gameUnit.name}"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/unitPicture"
+			app:layout_constraintTop_toTopOf="@+id/unitPicture"
+			tools:text="Unit name" />
+
+		<TextView
+			android:id="@+id/unitAbilities"
+			style="@style/TextViewSubtitle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="10dp"
+			android:layout_marginEnd="16dp"
+			android:maxLines="3"
+			android:minLines="3"
+			android:text='@{gameUnit.description}'
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/unitPicture"
+			app:layout_constraintTop_toBottomOf="@+id/unitName"
+			tools:text="Abilities" />
+
+		<View
+			android:id="@+id/view"
+			android:layout_width="0dp"
+			android:layout_height="1dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="4dp"
+			android:layout_marginEnd="16dp"
+			android:background="@color/transparentBlack"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/unitPicture"
+			app:layout_constraintTop_toBottomOf="@+id/unitAbilities" />
+
+
+		<TextView
+			android:id="@+id/strength"
+			style="@style/TextViewSubtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="8dp"
+			android:drawableLeft="@drawable/ic_strength"
+			android:drawablePadding="10dp"
+			android:gravity="center"
+			android:text='@{gameUnit.strength + ""}'
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toStartOf="@+id/agility"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toEndOf="@+id/unitPicture"
+			app:layout_constraintTop_toBottomOf="@+id/view"
+			tools:text="10.2" />
+
+		<TextView
+			android:id="@+id/agility"
+			style="@style/TextViewSubtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="8dp"
+			android:drawableLeft="@drawable/ic_agility"
+			android:drawablePadding="10dp"
+			android:gravity="center"
+			android:text='@{gameUnit.agility + ""}'
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toStartOf="@+id/intelligence"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toEndOf="@+id/strength"
+			app:layout_constraintTop_toBottomOf="@+id/view"
+			app:layout_constraintVertical_bias="0.0"
+			tools:text="22.0" />
+
+		<TextView
+			android:id="@+id/intelligence"
+			style="@style/TextViewSubtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4dp"
+			android:layout_marginEnd="16dp"
+			android:layout_marginBottom="8dp"
+			android:drawableLeft="@drawable/ic_intelligence"
+			android:drawablePadding="10dp"
+			android:gravity="center"
+			android:text='@{gameUnit.intelligence + ""}'
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toEndOf="@+id/agility"
+			app:layout_constraintTop_toBottomOf="@+id/view"
+			tools:text="22.0" />
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

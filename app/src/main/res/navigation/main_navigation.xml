@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/main"
+	android:label="MainNavigation"
+	app:startDestination="@id/homeFragment">
+
+	<fragment
+		android:id="@+id/homeFragment"
+		android:name="com.starwars.android.fragments.HomeFragment"
+		android:label="Game units"
+		tools:layout="@layout/fragment_home">
+
+		<action
+			android:id="@+id/action_homeFragment_to_unitDetailFragment"
+			app:destination="@id/unitDetailFragment" />
+		<action
+			android:id="@+id/action_homeFragment_to_fragmentGame"
+			app:destination="@id/fragmentGame" />
+
+	</fragment>
+
+	<fragment
+		android:id="@+id/battleHistoryFragment"
+		android:name="com.starwars.android.fragments.BattleHistoryFragment"
+		android:label="Battle History"
+		tools:layout="@layout/fragment_battle_history" />
+
+	<fragment
+		android:id="@+id/unitDetailFragment"
+		android:name="com.starwars.android.fragments.UnitDetailFragment"
+		android:label="Unit Detail"
+		tools:layout="@layout/fragment_unit_detail">
+
+		<argument
+			android:name="unitId"
+			app:argType="string"
+			app:nullable="true" />
+
+	</fragment>
+
+	<fragment
+		android:id="@+id/fragmentGame"
+		android:name="com.starwars.android.fragments.FragmentGame"
+		android:label="Battle Arena" />
+
+</navigation>

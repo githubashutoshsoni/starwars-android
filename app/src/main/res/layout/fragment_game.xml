@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="droidArmyCount"
+			type="int" />
+
+		<variable
+			name="cloneArmyCount"
+			type="int" />
+
+		<variable
+			name="droidArmyAliveCount"
+			type="int" />
+
+		<variable
+			name="cloneArmyAliveCount"
+			type="int" />
+	</data>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<ImageView
+			android:id="@+id/imageView"
+			android:layout_width="0dp"
+			android:layout_height="200dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="16dp"
+			android:layout_marginEnd="8dp"
+			android:scaleType="centerCrop"
+			android:src="@mipmap/clone_army"
+			app:layout_constraintEnd_toStartOf="@+id/imageView2"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<ImageView
+			android:id="@+id/imageView2"
+			android:layout_width="0dp"
+			android:layout_height="200dp"
+			android:layout_marginStart="8dp"
+			android:layout_marginTop="16dp"
+			android:layout_marginEnd="16dp"
+			android:scaleType="centerCrop"
+			android:src="@mipmap/droid_army"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toEndOf="@+id/imageView"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<TextView
+			android:id="@+id/textView9"
+			style="@style/TextViewHeading"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="26dp"
+			android:text="Clone trooper army"
+			app:layout_constraintEnd_toEndOf="@+id/imageView"
+			app:layout_constraintStart_toStartOf="@+id/imageView"
+			app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+		<TextView
+			android:id="@+id/textView10"
+			style="@style/TextViewHeading"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="26dp"
+			android:layout_marginEnd="8dp"
+			android:text="Droid army"
+			app:layout_constraintEnd_toEndOf="@+id/imageView2"
+			app:layout_constraintStart_toStartOf="@+id/imageView2"
+			app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+		<TextView
+			android:id="@+id/textView11"
+			style="@style/TextViewSubtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:layout_marginTop="16dp"
+			android:text='@{"" + cloneArmyCount}'
+			app:layout_constraintEnd_toEndOf="@+id/textView9"
+			app:layout_constraintStart_toStartOf="@+id/textView9"
+			app:layout_constraintTop_toBottomOf="@+id/textView15"
+			tools:text="232" />
+
+		<TextView
+			android:id="@+id/textView12"
+			style="@style/TextViewSubtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:text='@{"" + droidArmyCount}'
+			app:layout_constraintEnd_toEndOf="@+id/textView10"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toStartOf="@+id/textView10"
+			app:layout_constraintTop_toBottomOf="@+id/textView15"
+			tools:text="380" />
+
+		<Button
+			android:id="@+id/startBattle"
+			style="@style/PrimaryBottomButton"
+			android:layout_width="0dp"
+			android:layout_height="50dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginEnd="16dp"
+			android:layout_marginBottom="16dp"
+			android:text="Start Attacking"
+			android:textAllCaps="false"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent" />
+
+		<TextView
+			android:id="@+id/textView15"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:text="Initial troops"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+		<TextView
+			android:id="@+id/textView16"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="80dp"
+			android:text="Troops alive"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+		<TextView
+			android:id="@+id/textView17"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:text='@{"" + cloneArmyAliveCount}'
+			app:layout_constraintEnd_toEndOf="@+id/textView11"
+			app:layout_constraintStart_toStartOf="@+id/textView11"
+			app:layout_constraintTop_toBottomOf="@+id/textView16"
+			tools:text="180" />
+
+		<TextView
+			android:id="@+id/textView18"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:text='@{"" + droidArmyAliveCount}'
+			app:layout_constraintEnd_toEndOf="@+id/textView12"
+			app:layout_constraintStart_toStartOf="@+id/textView12"
+			app:layout_constraintTop_toBottomOf="@+id/textView16"
+			tools:text="0" />
+
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
+
