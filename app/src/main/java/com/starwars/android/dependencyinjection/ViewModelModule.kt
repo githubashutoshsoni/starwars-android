@@ -2,6 +2,7 @@ package com.starwars.android.dependencyinjection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.starwars.android.viewmodel.BattleHistoryViewModel
 import com.starwars.android.viewmodel.GameUnitDetailViewModel
 import com.starwars.android.viewmodel.HomeViewModel
 
@@ -22,6 +23,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(GameUnitDetailViewModel::class)
     abstract fun bindGameViewModel(viewModel: GameUnitDetailViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BattleHistoryViewModel::class)
+    abstract fun bindBattleHistoryViewModel(viewModel: BattleHistoryViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

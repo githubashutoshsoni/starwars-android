@@ -9,11 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.starwars.android.data.api.Result
+import com.starwars.android.data.api.models.BattleHistoryRequest
 import com.starwars.android.data.room.models.GameUnit
 import com.starwars.android.databinding.FragmentGameBinding
 import com.starwars.android.dependencyinjection.Injectable
 import com.starwars.android.dependencyinjection.injectViewModel
 import com.starwars.android.toast
+import com.starwars.android.viewmodel.BattleHistoryViewModel
 import com.starwars.android.viewmodel.HomeViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -25,6 +27,7 @@ class FragmentGame : Fragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: HomeViewModel
+    private lateinit var battleHistoryViewModel: BattleHistoryViewModel
 
     var gameUnits = ArrayList<GameUnit>()
 
@@ -42,12 +45,10 @@ class FragmentGame : Fragment(), Injectable {
     val cloneArmyTroops = ArrayList<GameUnit>()
 
     // Gonna participate in battle
-    val droidBattleTroops = ArrayList<Battleunit>()
-    val cloneBattleTroops = ArrayList<Battleunit>()
+    val droidBattleTroops = ArrayList<BattleUnit>()
+    val cloneBattleTroops = ArrayList<BattleUnit>()
 
     val warLog = ArrayList<String>()
-    // Meters
-    val TERRAIN_RADIUS = 5000
 
     lateinit var dBinding: FragmentGameBinding
 
@@ -61,6 +62,7 @@ class FragmentGame : Fragment(), Injectable {
         val binding = FragmentGameBinding.inflate(inflater, container, false)
 
         viewModel = injectViewModel(viewModelFactory)
+        battleHistoryViewModel = injectViewModel(viewModelFactory)
 
         dBinding = binding
 
@@ -130,7 +132,6 @@ class FragmentGame : Fragment(), Injectable {
 
         groupTroops()
 
-
     }
 
     // Group troops based on its type
@@ -154,13 +155,13 @@ class FragmentGame : Fragment(), Injectable {
         for (i in 0..DRIOD_ARMY_CAPACITY) {
             val randomTroop = Random.nextInt(0, droidArmyTroops.size - 1)
             val troop = droidArmyTroops[randomTroop]
-            droidBattleTroops.add(Battleunit(i, troop.name, troop.strength.toDouble(), troop.agility.toDouble(), troop.intelligence.toDouble()))
+            droidBattleTroops.add(BattleUnit(i, troop.name, troop.strength.toDouble(), troop.agility.toDouble(), troop.intelligence.toDouble()))
         }
 
         for (i in 0..CLONE_TROOP_CAPACITY) {
             val randomTroop = Random.nextInt(0, cloneArmyTroops.size - 1)
             val troop = cloneArmyTroops[randomTroop]
-            cloneBattleTroops.add(Battleunit(i, troop.name, troop.strength.toDouble(), troop.agility.toDouble(), troop.intelligence.toDouble()))
+            cloneBattleTroops.add(BattleUnit(i, troop.name, troop.strength.toDouble(), troop.agility.toDouble(), troop.intelligence.toDouble()))
         }
 
     }
@@ -189,22 +190,27 @@ class FragmentGame : Fragment(), Injectable {
 
             removeDeadTroops()
 
-
         } catch (e: Exception) {
 
         }
 
         if (cloneBattleTroops.size == 0 || droidBattleTroops.size == 0) {
+            var battleHistoryRequest: BattleHistoryRequest? = null
             battleEnded = true
             if (cloneBattleTroops.size > droidBattleTroops.size) {
+                battleHistoryRequest = BattleHistoryRequest(CLONE_TROOP_CAPACITY, DRIOD_ARMY_CAPACITY, "CLONE_TROOPERS")
                 context?.toast("Clone trooper won the battle")
             } else {
+                battleHistoryRequest = BattleHistoryRequest(CLONE_TROOP_CAPACITY, DRIOD_ARMY_CAPACITY, "DROID_ARMY")
                 context?.toast("Droid army won the battle")
             }
+            battleHistoryViewModel.battleHistoryRequest = battleHistoryRequest
+            battleHistoryViewModel.sendBattleHistory.observe(viewLifecycleOwner, Observer { result ->
+
+            })
         }
 
         bindData()
-
 
     }
 
@@ -241,7 +247,7 @@ class FragmentGame : Fragment(), Injectable {
 
 }
 
-data class Battleunit(
+data class BattleUnit(
         val troopId: Int,
         val name: String,
         var strength: Double = 0.0,

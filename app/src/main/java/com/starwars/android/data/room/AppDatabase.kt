@@ -6,13 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.starwars.android.Constants
 import com.starwars.android.data.room.dao.GameDAO
+import com.starwars.android.data.room.models.BattleHistory
 import com.starwars.android.data.room.models.GameUnit
 
 /**
  * The Room database for this app
  */
-@Database(entities = [GameUnit::class],
-        version = 2, exportSchema = false)
+@Database(entities = [GameUnit::class, BattleHistory::class],
+        version = 4, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getGameDao(): GameDAO

@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
+import com.starwars.android.data.room.models.BattleHistory
 import com.starwars.android.data.room.models.GameUnit
 
 @Dao
@@ -21,5 +22,11 @@ interface GameDAO {
 
     @Insert(onConflict = REPLACE)
     fun insertMany(gameUnit: List<GameUnit>)
+
+    @Insert(onConflict = REPLACE)
+    fun insertManyBattleHistory(gameUnit: List<BattleHistory>)
+
+    @Query("SELECT * FROM history ORDER BY _id")
+    fun getAllBattleHistory(): LiveData<List<BattleHistory>>
 
 }

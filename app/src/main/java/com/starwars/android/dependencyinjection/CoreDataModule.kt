@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import okhttp3.logging.HttpLoggingInterceptor.Level.NONE
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -23,7 +24,7 @@ class CoreDataModule {
 
     @Provides
     fun provideLoggingInterceptor() =
-            HttpLoggingInterceptor().apply { level = if (BuildConfig.DEBUG) NONE else NONE }
+            HttpLoggingInterceptor().apply { level = if (BuildConfig.DEBUG) BODY else NONE }
 
     @Provides
     @Singleton
