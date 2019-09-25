@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="clickListener"
+			type="android.view.View.OnClickListener" />
+
+		<variable
+			name="gameUnit"
+			type="com.starwars.android.data.room.models.GameUnit" />
+	</data>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<ImageView
+			android:id="@+id/gameUnitPicture"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scaleType="fitXY"
+			app:imageFromUrl="@{gameUnit.picture}"
+			tools:srcCompat="@tools:sample/backgrounds/scenic[7]" />
+
+		<androidx.core.widget.NestedScrollView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="16dp"
+			android:layout_marginTop="300dp">
+
+			<androidx.cardview.widget.CardView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginTop="260dp">
+
+				<androidx.constraintlayout.widget.ConstraintLayout
+					android:id="@+id/recyclerView"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<EditText
+						android:id="@+id/editTextUnitName"
+						style="@style/TextViewHeading"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="16dp"
+						android:layout_marginTop="16dp"
+						android:layout_marginEnd="16dp"
+						android:imeOptions="actionNext"
+						android:inputType="number"
+						android:text="@{gameUnit.name}"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toTopOf="parent"
+						tools:text="Game unit name" />
+
+					<androidx.constraintlayout.widget.ConstraintLayout
+						android:id="@+id/constraintLayout2"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="8dp"
+						app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+						app:layout_constraintHorizontal_bias="0.5"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/editTextUnitName">
+
+						<EditText
+							android:id="@+id/editTextStrength"
+							style="@style/TextViewTitle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="8dp"
+							android:text='@{"" + gameUnit.strength}'
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toTopOf="parent"
+							tools:text="10.2" />
+
+						<ImageView
+							android:id="@+id/strengthIcon"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="8dp"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toBottomOf="@+id/editTextStrength"
+							app:srcCompat="@drawable/ic_strength" />
+
+						<TextView
+							android:id="@+id/textView4"
+							style="@style/TextViewSubtitle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="@string/strength"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toBottomOf="@+id/strengthIcon" />
+					</androidx.constraintlayout.widget.ConstraintLayout>
+
+					<androidx.constraintlayout.widget.ConstraintLayout
+						android:id="@+id/constraintLayout"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="8dp"
+						app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
+						app:layout_constraintHorizontal_bias="0.5"
+						app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
+						app:layout_constraintTop_toBottomOf="@+id/editTextUnitName">
+
+						<EditText
+							android:id="@+id/editTextAgility"
+							style="@style/TextViewTitle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="8dp"
+							android:inputType="number"
+							android:text='@{"" + gameUnit.agility}'
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toTopOf="parent"
+							tools:text="10.2" />
+
+						<ImageView
+							android:id="@+id/agilityIcon"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="8dp"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toBottomOf="@+id/editTextAgility"
+							app:srcCompat="@drawable/ic_agility" />
+
+						<TextView
+							android:id="@+id/textView7"
+							style="@style/TextViewSubtitle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="@string/agility"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toBottomOf="@+id/agilityIcon" />
+					</androidx.constraintlayout.widget.ConstraintLayout>
+
+					<androidx.constraintlayout.widget.ConstraintLayout
+						android:id="@+id/constraintLayout3"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="8dp"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintHorizontal_bias="0.5"
+						app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+						app:layout_constraintTop_toBottomOf="@+id/editTextUnitName">
+
+						<EditText
+							android:id="@+id/editTextIntelligence"
+							style="@style/TextViewTitle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="8dp"
+							android:imeOptions="actionNext"
+							android:inputType="number"
+							android:text='@{"" + gameUnit.intelligence}'
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toTopOf="parent"
+							tools:text="10.2" />
+
+						<ImageView
+							android:id="@+id/knowledgeIcon"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="8dp"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toBottomOf="@+id/editTextIntelligence"
+							app:srcCompat="@drawable/ic_intelligence" />
+
+						<TextView
+							android:id="@+id/textView5"
+							style="@style/TextViewSubtitle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="@string/intelligence"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toBottomOf="@+id/knowledgeIcon" />
+					</androidx.constraintlayout.widget.ConstraintLayout>
+
+					<EditText
+						android:id="@+id/unitDescription"
+						style="@style/TextViewParagraph"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="16dp"
+						android:layout_marginTop="16dp"
+						android:layout_marginEnd="16dp"
+						android:imeOptions="actionDone"
+						android:text="@{gameUnit.description}"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+						tools:text="Game Unit Description" />
+
+					<Button
+						android:id="@+id/button"
+						style="@style/PrimaryBottomButton"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="16dp"
+						android:layout_marginTop="16dp"
+						android:layout_marginEnd="16dp"
+						android:layout_marginBottom="8dp"
+						android:onClick="@{clickListener}"
+						android:text="@string/update"
+						app:layout_constraintBottom_toBottomOf="parent"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/unitDescription" />
+
+				</androidx.constraintlayout.widget.ConstraintLayout>
+
+			</androidx.cardview.widget.CardView>
+
+		</androidx.core.widget.NestedScrollView>
+
+
+		<ProgressBar
+			android:id="@+id/progressBar"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			tools:visibility="gone" />
+
+	</FrameLayout>
+
+
+</layout>

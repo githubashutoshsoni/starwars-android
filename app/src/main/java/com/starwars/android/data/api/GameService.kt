@@ -1,11 +1,9 @@
 package com.starwars.android.data.api
 
 import com.starwars.android.data.api.models.*
+import com.starwars.android.data.room.models.GameUnit
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface GameService {
 
@@ -20,5 +18,8 @@ interface GameService {
 
     @GET("battle")
     suspend fun getAllBattleHistory(): Response<BattleHistoryResponse>
+
+    @PUT("unit")
+    suspend fun updateUnit(@Body body: GameUnit): Response<CommonResponse>
 
 }

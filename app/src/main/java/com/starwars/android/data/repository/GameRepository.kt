@@ -5,6 +5,7 @@ import com.starwars.android.data.api.GameRemoteDataSource
 import com.starwars.android.data.api.models.BattleHistoryRequest
 import com.starwars.android.data.resultLiveData
 import com.starwars.android.data.room.dao.GameDAO
+import com.starwars.android.data.room.models.GameUnit
 import javax.inject.Inject
 
 class GameRepository @Inject constructor(private val dao: GameDAO,
@@ -30,6 +31,12 @@ class GameRepository @Inject constructor(private val dao: GameDAO,
             databaseQuery = { dao.getAllBattleHistory() },
             networkCall = { remoteSource.sendBattle(battleHistory) },
             saveCallResult = { })
+            .distinctUntilChanged()
+
+    fun updateGameUnit(gameUnit: GameUnit) = resultLiveData(
+            databaseQuery = { dao.getAllGameUnits() },
+            networkCall = { remoteSource.updateGameUnit(gameUnit) },
+            saveCallResult = { remoteSource.getGameUnit(gameUnit._id) })
             .distinctUntilChanged()
 
 }

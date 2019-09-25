@@ -14,5 +14,10 @@
 	<string name="strength">Strength</string>
 	<string name="agility">Agility</string>
 	<string name="intelligence">Intelligence</string>
+	<string name="go_back">Go back</string>
+	<string name="droid_won">Droid army won the battle</string>
+	<string name="clone_won">Clone trooper won the battle</string>
+	<string name="update">Update</string>
+	<string name="update_unit">Update Unit</string>
 
 </resources>

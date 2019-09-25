@@ -8,11 +8,11 @@ data class GameUnit(
         @PrimaryKey val _id: String,
         val name: String,
         val agility: Int = 0,
-        val createdAt: String?,
         val description: String?,
         val intelligence: Int = 0,
-        val picture: String?,
         val strength: Int = 0,
         val type: String?,
+        val picture: String?,
+        val createdAt: String?,
         val updatedAt: String?
 )

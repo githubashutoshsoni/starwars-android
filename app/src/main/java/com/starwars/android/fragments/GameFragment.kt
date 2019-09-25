@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.starwars.android.R
 import com.starwars.android.data.api.Result
 import com.starwars.android.data.api.models.BattleHistoryRequest
 import com.starwars.android.data.room.models.GameUnit
@@ -123,7 +124,8 @@ class FragmentGame : Fragment(), Injectable {
         // Update clone troopers count using 2/3 rule
         MAX_CLONE_TROOPER_LIMIT = (2 * DRIOD_ARMY_CAPACITY) / 3
 
-        if (MAX_CLONE_TROOPER_LIMIT == 0) MAX_CLONE_TROOPER_LIMIT = 2
+        // Random number cannot be generated for range 1 to 1.
+        if (MAX_CLONE_TROOPER_LIMIT <= 1) MAX_CLONE_TROOPER_LIMIT = 2
 
         // using above value finally randomize clone troop army count
         CLONE_TROOP_CAPACITY = Random.nextInt(1, MAX_CLONE_TROOPER_LIMIT)
@@ -155,62 +157,63 @@ class FragmentGame : Fragment(), Injectable {
         for (i in 0..DRIOD_ARMY_CAPACITY) {
             val randomTroop = Random.nextInt(0, droidArmyTroops.size - 1)
             val troop = droidArmyTroops[randomTroop]
-            droidBattleTroops.add(BattleUnit(i, troop.name, troop.strength.toDouble(), troop.agility.toDouble(), troop.intelligence.toDouble()))
+            droidBattleTroops.add(BattleUnit(troop.name, troop.strength.toDouble(), troop.agility.toDouble(), troop.intelligence.toDouble()))
         }
 
         for (i in 0..CLONE_TROOP_CAPACITY) {
             val randomTroop = Random.nextInt(0, cloneArmyTroops.size - 1)
             val troop = cloneArmyTroops[randomTroop]
-            cloneBattleTroops.add(BattleUnit(i, troop.name, troop.strength.toDouble(), troop.agility.toDouble(), troop.intelligence.toDouble()))
+            cloneBattleTroops.add(BattleUnit(troop.name, troop.strength.toDouble(), troop.agility.toDouble(), troop.intelligence.toDouble()))
         }
 
     }
 
     private fun startAttacking() {
 
-        try {
 
-            val cloneTroop = cloneBattleTroops.random()
-            val droidTroop = droidBattleTroops.random()
+        val randomCloneTroopIndex = Random.nextInt(cloneBattleTroops.size)
+        val randomDroidTroopIndex = Random.nextInt(droidBattleTroops.size)
+        val cloneTroop = cloneBattleTroops[randomCloneTroopIndex]
+        val droidTroop = droidBattleTroops[randomDroidTroopIndex]
 
-            //let's take 30% of agility as  armour, armour gives immune to damage
-            val cloneTroopArmour = cloneTroop.agility * 0.3
-            val droidTroopArmour = cloneTroop.agility * 0.3
+        //let's take 30% of agility as  armour, armour gives immune to damage
+        val cloneTroopArmour = cloneTroop.agility * 0.3
+        val droidTroopArmour = cloneTroop.agility * 0.3
 
-            // Deal damage to the enemy unit w.r.t armour
-            cloneTroop.strength = cloneTroop.strength - (droidTroop.intelligence - cloneTroopArmour)
-            droidTroop.strength = droidTroop.strength - (cloneTroop.intelligence - droidTroopArmour)
+        // Deal damage to the enemy unit w.r.t armour
+        cloneTroop.strength = cloneTroop.strength - (droidTroop.intelligence - cloneTroopArmour)
+        droidTroop.strength = droidTroop.strength - (cloneTroop.intelligence - droidTroopArmour)
 
 
-            warLog.add("${droidTroop.name} attacked ${cloneTroop.name} dealt damage of ${droidTroop.intelligence}")
-            cloneBattleTroops[cloneTroop.troopId] = cloneTroop
+        warLog.add("${droidTroop.name} attacked ${cloneTroop.name} dealt damage of ${droidTroop.intelligence}")
+        cloneBattleTroops[randomCloneTroopIndex] = cloneTroop
 
-            warLog.add("${cloneTroop.name} attacked ${droidTroop.name} dealt damage of ${cloneTroop.intelligence}")
-            droidBattleTroops[droidTroop.troopId] = droidTroop
+        warLog.add("${cloneTroop.name} attacked ${droidTroop.name} dealt damage of ${cloneTroop.intelligence}")
+        droidBattleTroops[randomDroidTroopIndex] = droidTroop
 
-            removeDeadTroops()
+        removeDeadTroops()
 
-        } catch (e: Exception) {
-
-        }
 
         if (cloneBattleTroops.size == 0 || droidBattleTroops.size == 0) {
             var battleHistoryRequest: BattleHistoryRequest? = null
             battleEnded = true
             if (cloneBattleTroops.size > droidBattleTroops.size) {
                 battleHistoryRequest = BattleHistoryRequest(CLONE_TROOP_CAPACITY, DRIOD_ARMY_CAPACITY, "CLONE_TROOPERS")
-                context?.toast("Clone trooper won the battle")
+                dBinding.battleResult.text = getString(R.string.clone_won)
             } else {
                 battleHistoryRequest = BattleHistoryRequest(CLONE_TROOP_CAPACITY, DRIOD_ARMY_CAPACITY, "DROID_ARMY")
-                context?.toast("Droid army won the battle")
+                dBinding.battleResult.text = getString(R.string.droid_won)
             }
             battleHistoryViewModel.battleHistoryRequest = battleHistoryRequest
             battleHistoryViewModel.sendBattleHistory.observe(viewLifecycleOwner, Observer { result ->
-
             })
+            bindData()
+            dBinding.startBattle.text = getString(R.string.go_back)
+        } else {
+            bindData()
+            startAttacking()
         }
 
-        bindData()
 
     }
 
@@ -248,7 +251,6 @@ class FragmentGame : Fragment(), Injectable {
 }
 
 data class BattleUnit(
-        val troopId: Int,
         val name: String,
         var strength: Double = 0.0,
         val agility: Double = 0.0,

@@ -59,6 +59,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     bottomNav.hide()
                 R.id.fragmentGame ->
                     bottomNav.hide()
+                R.id.updateUnitFragment ->
+                    bottomNav.hide()
                 else -> {
                     bottomNav.show()
                 }

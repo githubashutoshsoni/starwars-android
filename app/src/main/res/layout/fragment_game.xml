@@ -112,7 +112,6 @@
 			android:layout_marginEnd="16dp"
 			android:layout_marginBottom="16dp"
 			android:text="@string/start_attacking"
-			android:textAllCaps="false"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent" />
@@ -123,6 +122,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
 			android:text="@string/initial_troops"
+			style="@style/TextViewSubtitle"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -133,6 +133,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="80dp"
 			android:text="@string/troops_alive"
+			style="@style/TextViewSubtitle"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -158,6 +159,18 @@
 			app:layout_constraintStart_toStartOf="@+id/textView12"
 			app:layout_constraintTop_toBottomOf="@+id/textView16"
 			tools:text="0" />
+
+		<TextView
+			android:id="@+id/battleResult"
+			style="@style/TextViewTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="24dp"
+			android:layout_marginEnd="16dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
 
 	</androidx.constraintlayout.widget.ConstraintLayout>

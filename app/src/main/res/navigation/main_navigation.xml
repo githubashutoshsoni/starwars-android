@@ -14,10 +14,18 @@
 
 		<action
 			android:id="@+id/action_homeFragment_to_unitDetailFragment"
-			app:destination="@id/unitDetailFragment" />
+			app:destination="@id/unitDetailFragment"
+			app:enterAnim="@anim/slide_in_right"
+			app:exitAnim="@anim/slide_out_left"
+			app:popEnterAnim="@anim/slide_in_left"
+			app:popExitAnim="@anim/slide_out_right" />
 		<action
 			android:id="@+id/action_homeFragment_to_fragmentGame"
-			app:destination="@id/fragmentGame" />
+			app:destination="@id/fragmentGame"
+			app:enterAnim="@anim/slide_in_right"
+			app:exitAnim="@anim/slide_out_left"
+			app:popEnterAnim="@anim/slide_in_left"
+			app:popExitAnim="@anim/slide_out_right" />
 
 	</fragment>
 
@@ -37,12 +45,33 @@
 			android:name="unitId"
 			app:argType="string"
 			app:nullable="true" />
+		<action
+			android:id="@+id/action_unitDetailFragment_to_updateUnitFragment"
+			app:destination="@id/updateUnitFragment"
+			app:enterAnim="@anim/slide_in_right"
+			app:exitAnim="@anim/slide_out_left"
+			app:popEnterAnim="@anim/slide_in_left"
+			app:popExitAnim="@anim/slide_out_right" />
 
 	</fragment>
 
 	<fragment
 		android:id="@+id/fragmentGame"
 		android:name="com.starwars.android.fragments.FragmentGame"
-		android:label="Battle Arena" />
+		android:label="Battle Arena"
+		tools:layout="@layout/fragment_game" />
+
+	<fragment
+		android:id="@+id/updateUnitFragment"
+		android:name="com.starwars.android.fragments.UpdateUnitFragment"
+		android:label="Update Unit"
+		tools:layout="@layout/fragment_update_unit">
+
+		<argument
+			android:name="unitId"
+			app:argType="string"
+			app:nullable="true" />
+
+	</fragment>
 
 </navigation>
