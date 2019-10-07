@@ -17,9 +17,5 @@
 - Dagger - A fast dependency injector for Android and Java. 
 timber, and other co-routine extensions.
 
-# Node.js
-
-Yet to integrate docker for deployment
-
 
 
